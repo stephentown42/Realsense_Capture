@@ -1,5 +1,5 @@
 # Realsense_Capture
-Functions to capture video and timestamps from realsense cameras and link to other data acquisition devices (TDT, Multichannel systems)
+Functions to capture video and timestamps from realsense infra-red (IR) cameras and link to other data acquisition devices (TDT, Multichannel systems)
 
 ## General
 Timestamp data is superimposed on frames for debugging/reconstruction, and also in tab delimited text files for later analysis.
