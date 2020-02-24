@@ -68,10 +68,22 @@ def get_center_value(img, pts):
     return center_val
 
 
-def add_text(cv2, im, pos, value, color=(255, 255, 255)):
+def add_text(cv2, im, pos, prefix, value, color=(255, 255, 255)):
 
-    txt = str(round(value))
-    cv2.putText(im, txt, pos, cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+    txt = prefix + ': ' + str(round(value))
+    cv2.putText(im, txt, pos, cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 1)
+
+
+def create_metadata_text(file_path, var_names):
+
+    fid = open(file_path + '_AT.txt', 'w')
+
+    for i in range(0, len(var_names) - 1):
+        fid.write(var_names[i] + '\t')
+
+    fid.write(var_names[-1] + '\n')    # Finish with new line
+
+    return fid
 
 
 def main():
@@ -83,8 +95,9 @@ def main():
 
     file_path = time.strftime('D:/Python_Videos/%Y-%m-%d_Track_%H-%M-%S')
 
-    fid = open(file_path + '_AT.txt', 'w')
-    fid.write('FrameCount\tTimeStamp\tTDT_Sample\n')
+    var_names = ['FrameCount','TimeStamp','FrameTs','SensorTs','ArrivalTs','TDT_Sample']
+    fid = create_metadata_text(file_path, var_names)
+
     logging.basicConfig(filename=file_path + '.log', level=logging.INFO)
 
     pipeline = configure_camera(rs, logging, im_y, im_x, fps)
@@ -102,27 +115,34 @@ def main():
         frames = pipeline.wait_for_frames()
 
         tdt_sample = tdt.GetTargetVal('RX8.zTime')
-        frame_count = frames.frame_number
-        time_stamp = frames.timestamp
+        frame_ts = frames.get_frame_metadata(rs.frame_metadata_value.frame_timestamp)
+        sensor_ts = frames.get_frame_metadata(rs.frame_metadata_value.sensor_timestamp)
+        arrival_ts = frames.get_frame_metadata(rs.frame_metadata_value.time_of_arrival)
 
-        ir_frame_1 = frames.get_infrared_frame(1)
-        ir_image_1 = np.asanyarray(ir_frame_1.get_data())
-        ir_image_1 = cv2.cvtColor(ir_image_1, cv2.COLOR_GRAY2BGR)
+        ir_frame = frames.get_infrared_frame(1)
+        ir_image = np.asanyarray(ir_frame.get_data())
+        ir_image = cv2.cvtColor(ir_image, cv2.COLOR_GRAY2BGR)
 
-        add_text(cv2, ir_image_1, (10, 20), tdt_sample)
-        add_text(cv2, ir_image_1, (10, 650), frame_count)
-        add_text(cv2, ir_image_1, (10, 690), time_stamp)
+        add_text(cv2, ir_image, (10, 630), 'Frame', frames.frame_number)
+        add_text(cv2, ir_image, (10, 650), 'Timestamp', frames.timestamp)
+        add_text(cv2, ir_image, (10, 670), 'Frame', frame_ts)
+        add_text(cv2, ir_image, (10, 690), 'Sensor', sensor_ts)
+        add_text(cv2, ir_image, (10, 710), 'Arrival', arrival_ts)
+        add_text(cv2, ir_image, (10, 20), 'TDT', tdt_sample)
 
         # Write the frame to disk
-        vid_1.write(ir_image_1)
+        vid_1.write(ir_image)
 
         # Write the time to text file
-        fid.write('%d\t' % frame_count)
-        fid.write('%d\t' % time_stamp)
+        fid.write('%d\t' % frames.frame_number)
+        fid.write('%d\t' % frames.timestamp)
+        fid.write('%d\t' % frame_ts)
+        fid.write('%d\t' % sensor_ts)
+        fid.write('%d\t' % arrival_ts)
         fid.write('%d\n' % tdt_sample)
 
         # Show the user
-        cv2.imshow('RealSense', ir_image_1)
+        cv2.imshow('RealSense', ir_image)
 
         # Escape once tdt closes
         if tdt.GetSysMode() == 0:
