@@ -1,5 +1,5 @@
 # Realsense_Capture
-Functions to capture video and timestamps from realsense infra-red (IR) cameras and link to other data acquisition devices (TDT, Multichannel systems)
+Functions to capture video and timestamps from realsense infra-red (IR) cameras and link to other data acquisition devices (TDT, Multichannel systems). Note that frame metadata must be enabled for all timestamps to be accessed (see https://dev.intelrealsense.com/docs/compiling-librealsense-for-windows-guide).
 
 ## General
 Timestamp data is superimposed on frames for debugging/reconstruction, and also in tab delimited text files for later analysis.
@@ -14,5 +14,5 @@ Records a single high resolution stream from one IR camera with timestamps super
 ## HighRes_IR (Redundant)
 Records high resolution streams from both IR camera - this function is problematic as writing to both video frames is slow, leading to dropped frames. 
 
-# stream_realsense_IR (Needs updating)
+## stream_realsense_IR (Needs updating)
 Streams video from one IR camera to viewer without saving. Does not require connection to TDT device to run.
