@@ -51,7 +51,7 @@ class recording():
 
         # Create video writer object if recording
         if record:
-            file_name = tiqme.strftime('%Y-%m-%dT%H-%M-%S_rs.avi')
+            file_name = time.strftime('%Y-%m-%dT%H-%M-%S_rs.avi')
             file_path = os.path.join( rec_path, file_name)
 
             fourcc = cv2.VideoWriter_fourcc(*'DIVX')
