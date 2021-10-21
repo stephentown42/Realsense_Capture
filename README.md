@@ -4,5 +4,8 @@ Functions to capture video and timestamps from realsense cameras. Here, they are
 
 ## Requirements
 * Installation of [librealsense SDK 2.0](https://github.com/IntelRealSense/librealsense)
-* H264 codec (optional)
 * Python
+
+**Optional**
+* H264 codec
+* TDT Open developer (for coordination with experimental data acquisition)
