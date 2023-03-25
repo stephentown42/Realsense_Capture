@@ -26,10 +26,6 @@ import cv2
 import numpy as np
 from dotenv import load_dotenv
 
-sys.path.insert(0, str(Path.cwd()))
-from lib import utils
-
-
 
 class keypoint_aligner():
     """ Computes homographic transform between images based on shared features (keypoints) 
@@ -180,17 +176,6 @@ class ecc_aligner():
 
 
 # Helper functions
-def get_file_names_from_db() -> List[str]:
-    """ Request a list of the names of all calibration image files in project from database """
-
-    img_files = utils.query_postgres('SELECT id FROM task_switch.calibration_images;')
-    return img_files['id'].to_list()
-
-
-def load_greyscale_image(file_path:Path, file_name:str) -> np.array:
-    """ Read image from file in grayscale """
-    return cv2.imread( str(file_path / file_name), cv2.IMREAD_GRAYSCALE)
-    
     
 def combine_images(template_img:np.array, test_img:np.array, aligned_img:np.array, resize_percent:float=50.0) -> np.array:
     """ Create a 2x2 composite image that juxtaposes a template image with test image in the first row, and the same template with the aligned image after registration.
@@ -234,74 +219,12 @@ def show_image(img):
     cv2.destroyAllWindows()
 
 
-def create_arbritrary_image(im_size=(480,640), test_rect=(100, 100, 1, 10)) -> np.array:
-
-    # Create base
-    img = np.zeros(im_size, dtype=np.uint8) + 20
-
-    # Add white rectangle to image
-    img[test_rect[0]:test_rect[0]+test_rect[2], test_rect[1]:test_rect[1]+test_rect[3]] = 255
-
-    return img
 
 
 
 def main():
-
-    # Define paths
-    load_dotenv()
-    data_path = Path(os.getenv("local_home")) / 'Task_Switching/head_tracking'
-    input_path = data_path / 'calibration_images'
-    output_path = data_path / 'calibration_alignment_intensity'
-    
-    # Reference image against which all others are aligned
-    # (The reference image should be selected as close to the middle of the variation in images as possible)
-    template_file = "2016-04-29 10_31_56.jpg"
-    template_img = load_greyscale_image(input_path, template_file)
-    # template_img = cv2.GaussianBlur(template_img, (15,15), cv2.BORDER_DEFAULT)
-
-    # Create aligner object for template
-    ecc = ecc_aligner(template_img=template_img)
-    kpt = keypoint_aligner(template_img=template_img)
-
-    # Test images for alignment
-    # file_names = get_file_names_from_db()
-    file_names = ['2017-03-27 17_33_33.jpg']
-
-    # Try to align each test image
-    for test_file in file_names:
-        
-        # Skip if already done
-        # output_file = output_path / test_file.replace('.jpg','_warp.txt')
-        # if output_file.exists():
-        #     continue
-
-        # Otherwise load and estimate alignment
-        test_img = load_greyscale_image(input_path, test_file)
-        # test_img = cv2.GaussianBlur(test_img, (5,5), cv2.BORDER_DEFAULT)
-        
-        # Use intensity based method
-        ecc.estimate(test_img)
-        print(f"{test_file}: correlation = {ecc.cc}")
-        
-        # Use keypoint based method
-        matches, test_kpts = kpt.match_images(test_img)
-        kpt.show_matches(test_img, test_kpts, matches)
-
-        kpt_homography = kpt.get_homography_matrix(matches, test_kpts)
-        test_aligned = kpt.apply_correction(test_img, kpt_homography)
-                        
-        # Save warp matrix for future
-        # np.savetxt(output_file, ecc.warp_matrix)
-
-        # Apply correction and save
-        test_aligned = ecc.apply_correction(test_img)
-        combined = combine_images(template_img, test_img, test_aligned)
-        show_image(combined)
-
-        # image_output = output_path / test_file.replace('.jpg','combined.jpg')
-        # cv2.imwrite(str(image_output), combined)
-
+    import doctest
+    doctest.testmod()
 
 
 if __name__ == '__main__':
