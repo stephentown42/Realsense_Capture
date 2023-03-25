@@ -1,6 +1,6 @@
 # Image registration
 
-Code demonstrating the alignment of images .
+Code demonstrating the alignment of images:
 
 * [Jupyter Notebook](./registration_demo.ipynb)
 * [Notebook PDF](./registration_demo.pdf)
