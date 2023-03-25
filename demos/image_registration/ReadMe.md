@@ -1,8 +1,12 @@
-# Contour Detection
+# Image registration
 
-Code demonstrating the identifiy of target region within an image and subsequent use of regional data to detect when the region is inhabited.
+Code demonstrating the alignment of images .
 
-* [Jupyter Notebook](./contour_detection.ipynb)
-* [Notebook PDF](./contour_detection.pdf)
-* [Notebook HTML](./contour_detection.html)
-* [python module](./contour_detection.py)
+* [Jupyter Notebook](./registration_demo.ipynb)
+* [Notebook PDF](./registration_demo.pdf)
+* [python module](./registration.py)
+
+An example of the use case for image registration in aligning head tracking data is shown in:
+
+* [Jupyter Notebook](./test_image_alignment.ipynb)
+* [Notebook pdf](./test_image_alignment.pdf)

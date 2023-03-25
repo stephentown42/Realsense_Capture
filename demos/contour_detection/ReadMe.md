@@ -4,5 +4,4 @@ Code demonstrating the identifiy of target region within an image and subsequent
 
 * [Jupyter Notebook](./contour_detection.ipynb)
 * [Notebook PDF](./contour_detection.pdf)
-* [Notebook HTML](./contour_detection.html)
 * [python module](./contour_detection.py)
