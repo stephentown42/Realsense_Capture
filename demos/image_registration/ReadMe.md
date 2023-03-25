@@ -9,4 +9,4 @@ Code demonstrating the alignment of images:
 An example of the use case for image registration in aligning head tracking data is shown in:
 
 * [Jupyter Notebook](./test_image_alignment.ipynb)
-* [Notebook pdf](./test_image_alignment.pdf)
+* [Notebook PDF](./test_image_alignment.pdf)
