@@ -1,17 +1,12 @@
 """ 
 Register images into a common reference frame 
 
-
-
-
 The motion model should approximate the variance in camera position with the fewest degrees of freedom needed. (I.e. don't use affine or homographic models unless you have a good reason)
-
 
 Sources:
 
 https://pyimagesearch.com/2020/08/31/image-alignment-and-registration-with-opencv/
 
-It looks like the original method for finding the homography matrix has been updated
 https://opencv.org/evaluating-opencvs-new-ransacs/
 
 https://learnopencv.com/image-alignment-ecc-in-opencv-c-python/
