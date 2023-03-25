@@ -1,0 +1,24 @@
+{
+	"ferrets": ["F1506_Phoenix",
+		"F1517_Mavis",
+		"F1518_Rita",
+		"F1602_Agatha",
+		"F1605_Snorlax",
+		"F1607_CifJif",
+		"F1613_Ariel"],
+	"paths": {
+		"Metadata": "C:/Users/steph/Documents/GitHub/Task_Switching/data/tables"
+		},
+	"dirs": {
+		"Tanks": "G:/UCL_Behaving",
+		"Calib_Im": "G:/Jumbo_calibration_linked",
+		"FrameValues": "C:/Users/steph/CloudStation/Frontiers/Task Switching/Video Tracking/Synchronization/StimTriggeredFrameVals",
+        "LED_vals_over_video": "C:/Users/steph/CloudStation/Frontiers/Task Switching/Video Tracking/Synchronization/LED_vals_over_video",
+		"Behavior":  {
+			"QualityControl": "C:/Users/steph/CloudStation/Frontiers/Task Switching/QualityControl/Trial Onset Verification/Behavior",
+			"VideoSynced": "C:/Users/steph/CloudStation/Frontiers/Task Switching/Video Tracking/Synchronization/Behavior"
+				}
+		},
+	"image_size": [640,480],
+	"tWindow": [-5, 5]
+}

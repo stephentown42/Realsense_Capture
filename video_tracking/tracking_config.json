@@ -1,0 +1,40 @@
+{
+	"ferrets": ["F1506_Phoenix",
+		"F1517_Mavis",
+		"F1518_Rita",
+		"F1602_Agatha",
+		"F1605_Snorlax",
+		"F1607_CifJif",
+		"F1613_Ariel"],
+	"output":{
+		"show_image": false,
+		"save_image": false,
+		"save_data": true},
+	"save_dir": {
+		"avi": "C:/Users/steph/Desktop/VideoTracking",
+		"csv": "C:/Users/steph/Desktop/VideoTracking"
+		},
+	"paths": {
+		"Metadata": "C:/Users/steph/CloudStation/Frontiers/Task Switching/Video Tracking/Metadata/video_metadata.csv"
+		},
+	"dirs": {
+		"Tanks": "G:/UCL_Behaving",
+		"Calib_Im": "G:/Jumbo_calibration_linked",		
+        	"Figures": "C:/Users/steph/CloudStation/Frontiers/Task Switching/Video Tracking/Figures",
+		"FrameTimes": "C:/Users/steph/CloudStation/Frontiers/Task Switching/Video Tracking/Synchronization/FrameTriggerTimes",
+		"LED_positions": "C:/Users/steph/CloudStation/Frontiers/Task Switching/Video Tracking/First_Pass",
+		"Metadata": "C:/Users/steph/Documents/GitHub/Task_Switching/data/tables",
+		"StimTriggered": {
+			"Behavior": "C:/Users/steph/CloudStation/Frontiers/Task Switching/Video Tracking/StimTriggeredPositions",
+			"Traces": "C:/Users/steph/Desktop/StimTriggeredFrameVals"
+		},
+		"Behavior": {
+			"Original": "C:/Users/steph/CloudStation/Frontiers/Task Switching/Behavior/Original_Data",
+			"QualityControl": "C:/Users/steph/CloudStation/Frontiers/Task Switching/QualityControl/Trial Onset Verification/Behavior",
+			"VideoSynced": "C:/Users/steph/CloudStation/Frontiers/Task Switching/Video Tracking/Synced_Behavior"
+		}
+	},
+	"tdt_lib": "C:/Users/steph/Documents/MATLAB/TDTSDK",
+	"image_size":[640,480],
+	"quality_threshold": 0.01
+}

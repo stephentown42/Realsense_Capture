@@ -58,7 +58,7 @@ class recording():
             self.vid_obj = cv2.VideoWriter(file_path, fourcc, self.fps, (self.width, self.height))
 
         # Start Camera
-        self.profile = self.pipeline.start(self.config)
+        self.profile = self.pipeline.start(self.config)     
         print(f"Starting camera (Serial no: {self.serial}) - press 'q' to stop")
 
 
